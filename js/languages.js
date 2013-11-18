@@ -16,7 +16,7 @@ var x = d3.time.scale()
 var y = d3.scale.linear()
     .range([height, 0]);
 
-var color = d3.scale.category10();
+var color = d3.scale.category20();
 
 var xAxis = d3.svg.axis()
     .scale(x)
@@ -53,8 +53,6 @@ d3.tsv('./repos_lang_month_clean.csv', function(error, data){
   }
   languages.splice(index, 1);
 
-  console.log(languages);
-
   x.domain(d3.extent(data, function(d) { return format.parse(d.month_created); }));
 
   y.domain([
@@ -85,7 +83,6 @@ d3.tsv('./repos_lang_month_clean.csv', function(error, data){
   language.append("path")
       .attr("class", "line")
       .attr("d", function(d) {
-        console.log(d);
         return line(d.values); })
       .style("stroke", function(d) { return color(d.name); });
 

@@ -46,6 +46,13 @@ d3.tsv('./repos_lang_month_clean.csv', function(error, data){
     }
   });
 
+  for(var i = 0; i < languages.length; i++){
+    if(languages[i].name === 'null'){
+      var index = i;
+    }
+  }
+  languages.splice(index, 1);
+
   console.log(languages);
 
   x.domain(d3.extent(data, function(d) { return format.parse(d.month_created); }));
@@ -81,5 +88,12 @@ d3.tsv('./repos_lang_month_clean.csv', function(error, data){
         console.log(d);
         return line(d.values); })
       .style("stroke", function(d) { return color(d.name); });
+
+  language.append("text")
+      .datum(function(d) { return {name: d.name, value: d.values[d.values.length - 1]}; })
+      .attr("transform", function(d) { return "translate(" + x(format.parse(d.value.month)) + "," + y(d.value.repo_count) + ")"; })
+      .attr("x", 3)
+      .attr("dy", ".35em")
+      .text(function(d) { return d.name; });
 
 });

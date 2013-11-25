@@ -1,0 +1,21 @@
+{
+  "name": "github_archive",
+  "version": "0.0.0",
+  "description": "github_archive ==============",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/macqueen/github_archive.git"
+  },
+  "author": "macqueen",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/macqueen/github_archive/issues"
+  },
+  "dependencies": {
+    "express": "~3.4.4"
+  }
+}

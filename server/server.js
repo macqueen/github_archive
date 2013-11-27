@@ -5,12 +5,25 @@ var app = express();
 
 app.use(express.bodyParser());
 
-https.get('https://api.github.com/repos/macqueen/github_archive/languages', function(res){
+var options = {
+  headers: {
+    'User-Agent': process.env.USERNAME,
+    'Authorization': 'token ' + process.env.OAUTH_TOKEN,
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE',
+    'Access-Control-Allow-Credentials': true
+  },
+  host: 'api.github.com',
+  path: '/repos/rubinius/rubinius/languages'
+};
 
+https.get(options, function(res){
+  console.log('requests left', res.headers['x-ratelimit-remaining']);
+  var result = '';
 	res.on('data', function(d){
-		process.stdout.write(d);
+    result += d;
+    console.log(result);
 	});
-
 }).on('error', function(e){
 	console.log('error', e);
 });
